@@ -200,7 +200,7 @@ export function AboutSection() {
               <motion.div variants={zoomIn} className="rounded-2xl overflow-hidden shadow-2xl">
                 <img
                   src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d"
-                  className="w-full h-40 sm:h-56 object-cover"
+                  className="w-full h-56 sm:h-72 object-cover"
                 />
               </motion.div>
 
@@ -224,7 +224,7 @@ export function AboutSection() {
               <motion.div variants={zoomIn} className="rounded-2xl overflow-hidden shadow-2xl">
                 <img
                   src="https://images.unsplash.com/photo-1553413077-190dd305871c"
-                  className="w-full h-40 sm:h-56 object-cover"
+                  className="w-full h-56 sm:h-72 object-cover"
                 />
               </motion.div>
             </div>
