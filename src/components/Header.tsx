@@ -21,7 +21,7 @@ export function Header() {
       <header
         className={cn(
           "fixed top-0 left-0 w-full bg-white shadow-md z-50 transition-all duration-300",
-          isScrolled ? "h-[75px]" : "h-[100px]"
+          isScrolled ? "h-[75px]" : "h-[75px]"
         )}
       >
         <div className="container mx-auto h-full px-4">
