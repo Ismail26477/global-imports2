@@ -1,41 +1,64 @@
-'use client';
-
 import { Shield, Award, Globe, Truck } from "lucide-react";
 import { useEffect, useRef } from "react";
-import { motion } from "framer-motion"; // ✅ ADDED
 
 // Mobile-only CSS animations for connecting lines and glowing dot
 const animationStyles = `
   @media (max-width: 767px) {
     @keyframes drawLine {
-      from { stroke-dashoffset: 1000; }
-      to { stroke-dashoffset: 0; }
+      from {
+        stroke-dashoffset: 1000;
+      }
+      to {
+        stroke-dashoffset: 0;
+      }
     }
 
     @keyframes glowDot {
-      0%, 10% { opacity: 0; }
-      15% { opacity: 1; }
-      85% { opacity: 1; }
-      90%, 100% { opacity: 0; }
+      0%, 10% {
+        opacity: 0;
+      }
+      15% {
+        opacity: 1;
+      }
+      85% {
+        opacity: 1;
+      }
+      90%, 100% {
+        opacity: 0;
+      }
     }
 
     @keyframes moveDot {
-      0%, 10% { offset-distance: 0%; }
-      90%, 100% { offset-distance: 100%; }
+      0%, 10% {
+        offset-distance: 0%;
+      }
+      90%, 100% {
+        offset-distance: 100%;
+      }
     }
 
-    .line-1 { animation: drawLine 1s ease-in-out 0.3s forwards; }
-    .line-2 { animation: drawLine 1s ease-in-out 1.2s forwards; }
-    .line-3 { animation: drawLine 1s ease-in-out 2.1s forwards; }
+    .line-1 {
+      animation: drawLine 1s ease-in-out 0.3s forwards;
+    }
+
+    .line-2 {
+      animation: drawLine 1s ease-in-out 1.2s forwards;
+    }
+
+    .line-3 {
+      animation: drawLine 1s ease-in-out 2.1s forwards;
+    }
 
     .dot-1 {
       animation: moveDot 0.8s ease-in-out 0.6s forwards;
       offset-path: path('M 0,0 Q 10,15 0,30');
     }
+
     .dot-2 {
       animation: moveDot 0.8s ease-in-out 1.5s forwards;
       offset-path: path('M 0,0 Q 10,15 0,30');
     }
+
     .dot-3 {
       animation: moveDot 0.8s ease-in-out 2.4s forwards;
       offset-path: path('M 0,0 Q 10,15 0,30');
@@ -46,23 +69,6 @@ const animationStyles = `
     }
   }
 `;
-
-// ✅ ONLY ADDED (scroll animation)
-const fadeUp = {
-  hidden: { opacity: 0, y: 60 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7, ease: "easeOut" },
-  },
-};
-
-const stagger = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.15 },
-  },
-};
 
 const badges = [
   {
@@ -111,6 +117,7 @@ export function TrustBadges() {
   const svgRef = useRef<SVGSVGElement>(null);
 
   useEffect(() => {
+    // Inject animation styles
     const style = document.createElement('style');
     style.textContent = animationStyles;
     document.head.appendChild(style);
@@ -122,47 +129,101 @@ export function TrustBadges() {
   return (
     <section className="py-8 md:py-8 bg-muted/50">
       <style>{animationStyles}</style>
-
-      <motion.div
-        className="container mx-auto px-4"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={stagger}
-      >
-
-        {/* Mobile Layout */}
-        <motion.div variants={fadeUp} className="md:hidden relative">
-          {/* SVG + cards untouched */}
+      <div className="container mx-auto px-4">
+        {/* Mobile Flow Layout with Connecting Lines */}
+        <div className="md:hidden relative">
+          {/* SVG Connecting Lines - positioned absolutely behind cards */}
           <svg
             ref={svgRef}
             className="absolute left-1/4 top-0 w-1/2 h-full pointer-events-none"
             style={{ overflow: 'visible' }}
           >
-            {/* same paths unchanged */}
+            {/* Line from Card 1 to Card 2 */}
+            <path
+              className="line-1"
+              d="M 0 120 Q 30 160 0 200"
+              stroke="#8B5E3C"
+              strokeWidth="3"
+              fill="none"
+              strokeLinecap="round"
+              strokeDasharray="1000"
+            />
+            {/* Glowing Dot for Line 1 */}
+            <circle
+              className="dot-1 glow-effect"
+              r="5"
+              fill="#8B5E3C"
+              opacity="0"
+            />
+
+            {/* Line from Card 2 to Card 3 */}
+            <path
+              className="line-2"
+              d="M 0 320 Q 30 360 0 400"
+              stroke="#8B5E3C"
+              strokeWidth="3"
+              fill="none"
+              strokeLinecap="round"
+              strokeDasharray="1000"
+            />
+            {/* Glowing Dot for Line 2 */}
+            <circle
+              className="dot-2 glow-effect"
+              r="5"
+              fill="#8B5E3C"
+              opacity="0"
+            />
+
+            {/* Line from Card 3 to Card 4 */}
+            <path
+              className="line-3"
+              d="M 0 520 Q 30 560 0 600"
+              stroke="#8B5E3C"
+              strokeWidth="3"
+              fill="none"
+              strokeLinecap="round"
+              strokeDasharray="1000"
+            />
+            {/* Glowing Dot for Line 3 */}
+            <circle
+              className="dot-3 glow-effect"
+              r="5"
+              fill="#8B5E3C"
+              opacity="0"
+            />
           </svg>
 
+          {/* Cards Grid */}
           <div className="grid grid-cols-2 gap-4 relative z-10">
-            <motion.div variants={fadeUp}><BadgeCard badge={badges[0]} /></motion.div>
-            <motion.div variants={fadeUp} className="pt-8"><BadgeCard badge={badges[1]} /></motion.div>
-            <motion.div variants={fadeUp}><BadgeCard badge={badges[2]} /></motion.div>
-            <motion.div variants={fadeUp}><BadgeCard badge={badges[3]} /></motion.div>
+            {/* Box 1 - Top Left */}
+            <div className="col-span-1 row-span-1">
+              <BadgeCard badge={badges[0]} />
+            </div>
+
+            {/* Box 2 - Top Right (offset down) */}
+            <div className="col-span-1 row-span-1 pt-8">
+              <BadgeCard badge={badges[1]} />
+            </div>
+
+            {/* Box 3 - Bottom Left */}
+            <div className="col-span-1 row-span-1">
+              <BadgeCard badge={badges[2]} />
+            </div>
+
+            {/* Box 4 - Bottom Right */}
+            <div className="col-span-1 row-span-1 pt-8">
+              <BadgeCard badge={badges[3]} />
+            </div>
           </div>
-        </motion.div>
+        </div>
 
-        {/* Desktop Layout */}
-        <motion.div
-          variants={stagger}
-          className="hidden md:grid grid-cols-4 gap-4"
-        >
+        {/* Desktop Grid Layout (unchanged) */}
+        <div className="hidden md:grid grid-cols-4 gap-4">
           {badges.map((badge, index) => (
-            <motion.div key={index} variants={fadeUp}>
-              <BadgeCard badge={badge} />
-            </motion.div>
+            <BadgeCard key={index} badge={badge} />
           ))}
-        </motion.div>
-
-      </motion.div>
+        </div>
+      </div>
     </section>
   );
 }
@@ -178,15 +239,39 @@ function BadgeCard({ badge }: { badge: typeof badges[0] }) {
         ${badge.borderColor}
       `}
     >
-      <div className={`flex items-center justify-center mb-4 md:mb-3 w-16 h-16 md:w-11 md:h-11 rounded-full ${badge.iconBg}`}>
-        <badge.icon className={`w-7 h-7 md:w-5 md:h-5 ${badge.iconColor}`} />
+      {/* Icon Container - Larger & Colored on mobile */}
+      <div 
+        className={`
+          flex items-center justify-center mb-4 md:mb-3
+          w-16 h-16 md:w-11 md:h-11 rounded-full
+          transition-transform duration-300 hover:scale-110
+          ${badge.iconBg}
+        `}
+      >
+        <badge.icon 
+          className={`w-7 h-7 md:w-5 md:h-5 ${badge.iconColor}`}
+        />
       </div>
 
-      <h3 className={`font-heading font-bold mb-2 md:mb-1 text-base md:text-[15px] ${badge.titleColor}`}>
+      {/* Title - Colored on mobile */}
+      <h3 
+        className={`
+          font-heading font-bold mb-2 md:mb-1 
+          text-base md:text-[15px] leading-snug md:leading-tight
+          ${badge.titleColor}
+        `}
+      >
         {badge.title}
       </h3>
 
-      <p className={`text-sm md:text-[12px] ${badge.descColor}`}>
+      {/* Description - Colored on mobile */}
+      <p 
+        className={`
+          text-sm md:text-[12px] leading-relaxed md:leading-tight 
+          line-clamp-3 md:line-clamp-2 font-medium md:font-normal
+          ${badge.descColor}
+        `}
+      >
         {badge.description}
       </p>
     </div>
