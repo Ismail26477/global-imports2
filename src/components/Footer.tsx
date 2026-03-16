@@ -111,11 +111,10 @@ export function Footer() {
               {/* Address */}
               <div className="flex items-start gap-3 text-sm md:text-base text-[#5A3A22]/90">
                 <MapPin className="w-5 h-5 mt-0.5 shrink-0" />
-                <span>🇮🇳 India Office
-2nd Floor, Paryag Paradise,
-Friends Colony,
-Beside Hanuman Mandir,
-Nagpur, India</span>
+                <span>China Office Room 1228, No.1 Buding, No. 36 Of Tongda Road, Lanshan District, Linyi City, Shandong Province, China</span>
+              </div>
+                <MapPin className="w-5 h-5 mt-0.5 shrink-0" />
+                <span>India Office 2nd Floor, Paryag Paradise, Friends Colony, Beside Hanuman Mandir, Nagpur, India</span>
               </div>
 
               {/* Team Contacts */}
