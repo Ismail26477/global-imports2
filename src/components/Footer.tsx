@@ -78,6 +78,30 @@ export function Footer() {
                 </li>
               ))}
             </ul>
+            {/* Team Contacts */}
+              <div className="pt-4 border-t border-[#5A3A22]/20">
+                <h4 className="font-semibold text-sm md:text-base mb-4">
+                  Team Contacts
+                </h4>
+
+                {/* 👇 2 Per Row Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {teamContacts.map((contact) => (
+                    <a
+                      key={contact.name}
+                      href={`tel:${contact.phone.replace(/\s/g, "")}`}
+                      className="p-3 rounded-lg bg-[#5A3A22]/5 hover:bg-[#5A3A22]/10 transition-all duration-300"
+                    >
+                      <p className="text-sm font-semibold">
+                        {contact.name}
+                      </p>
+                      <p className="text-xs md:text-sm text-[#5A3A22]/80">
+                        {contact.phone}
+                      </p>
+                    </a>
+                  ))}
+                </div>
+              </div>
           </div>
 
           {/* Contact Info */}
