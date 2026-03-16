@@ -111,7 +111,11 @@ export function Footer() {
               {/* Address */}
               <div className="flex items-start gap-3 text-sm md:text-base text-[#5A3A22]/90">
                 <MapPin className="w-5 h-5 mt-0.5 shrink-0" />
-                <span>Nagpur, Maharashtra, India</span>
+                <span>🇮🇳 India Office
+2nd Floor, Paryag Paradise,
+Friends Colony,
+Beside Hanuman Mandir,
+Nagpur, India</span>
               </div>
 
               {/* Team Contacts */}
